@@ -1,4 +1,5 @@
 ﻿using MultiShop.Order.Application.Interfaces;
+using MultiShop.Order.Application.ServiceExtension;
 using MultiShop.Order.Persistance.Repository;
 
 namespace MultShop.Order.WebApi.Extensions
@@ -9,7 +10,7 @@ namespace MultShop.Order.WebApi.Extensions
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(StartupExtensions).Assembly));
+            services.ConfigureRegistiration(configuration);//application katmanı içinde
         }
     }
 }
