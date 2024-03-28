@@ -40,7 +40,7 @@ namespace MultShop.Order.WebApi.Controllers
             await _mediator.Send(new RemoveAddressCommand(id));
             return Ok("Başarıyla Silindi");
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateAddress(UpdateAddressCommand command)
         {
             await _mediator.Send(command);

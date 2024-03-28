@@ -1,5 +1,6 @@
 ﻿using MultiShop.Order.Application.Interfaces;
 using MultiShop.Order.Application.ServiceExtension;
+using MultiShop.Order.Persistance.Context;
 using MultiShop.Order.Persistance.Repository;
 
 namespace MultShop.Order.WebApi.Extensions
@@ -8,8 +9,9 @@ namespace MultShop.Order.WebApi.Extensions
     {
         public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+            services.AddDbContext<OrderContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.ConfigureRegistiration(configuration);//application katmanı içinde
         }
     }

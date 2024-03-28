@@ -23,11 +23,11 @@ namespace MultiShop.Order.Application.Features.Mediator.Handlers.AddressHandlers
         {
             var values = await _repository.GetByIdAsync(request.AddressId);
 
-            //values.Detail = request.Detail;
-            //values.UserId = request.UserId;
-            //values.City = request.City;
-            //values.District = request.District;
-            await _repository.UpdateAsync(_mapper.Map<Address>(values));
+            values.Detail = request.Detail;
+            values.UserId = request.UserId;
+            values.City = request.City;
+            values.District = request.District;
+            await _repository.UpdateAsync(values);
         }
     }
 }
