@@ -29,7 +29,7 @@ namespace MultiShop.IdentityServer.Controllers
             };
 
             var httpClient = _httpClientFactory.CreateClient();
-            var response = await httpClient.PostAsync("https://localhost:5001/connect/token", new FormUrlEncodedContent(tokenData));
+            var response = await httpClient.PostAsync("http://localhost:5001/connect/token", new FormUrlEncodedContent(tokenData));
 
             var responseContent = await response.Content.ReadAsStringAsync();
 

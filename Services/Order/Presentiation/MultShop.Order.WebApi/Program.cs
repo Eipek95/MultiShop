@@ -1,8 +1,17 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultShop.Order.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(
+    JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["IdentityServerUrl"];
+        options.Audience = "ResourceOrder";
+        options.RequireHttpsMetadata = false;
+
+    });
 
 builder.Services.AddControllers();
 builder.Services.ConfigureServices(builder.Configuration);
@@ -17,11 +26,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MultiShop Order API v1"));
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
