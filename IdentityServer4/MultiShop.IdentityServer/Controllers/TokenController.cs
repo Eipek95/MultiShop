@@ -42,6 +42,33 @@ namespace MultiShop.IdentityServer.Controllers
 
             return BadRequest(responseContent);// Başarısız ise hata mesajını geri döndür
         }
+
+        [HttpPost("gettokenforuser")]
+        public async Task<IActionResult> GetTokenForUser(GetTokenForUserDto request)
+        {
+            var tokenData = new Dictionary<string, string>
+            {
+                { "grant_type", request.grant_type },
+                { "client_id", request.client_id },
+                { "client_secret", request.client_secret },
+                { "username", request.username },
+                { "password", request.password},
+            };
+
+            var httpClient = _httpClientFactory.CreateClient();
+            var response = await httpClient.PostAsync("http://localhost:5001/connect/token", new FormUrlEncodedContent(tokenData));
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+
+            // Başarılı ise cevabı geri döndür
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok(JsonConvert.DeserializeObject<ResultTokenDto>(responseContent));
+            }
+
+            return BadRequest(responseContent);// Başarısız ise hata mesajını geri döndür
+        }
     }
 }
 

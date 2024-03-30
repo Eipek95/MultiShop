@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.IdentityServer.Dtos;
 using MultiShop.IdentityServer.Models;
+using System.Linq;
 using System.Threading.Tasks;
 using static IdentityServer4.IdentityServerConstants;
 
@@ -37,6 +38,12 @@ namespace MultiShop.IdentityServer.Controllers
                 return Ok("Kullanıcı Başarıyla Oluştu");
             }
             return Ok("Bir hata oluştu");
+        }
+        [HttpGet]
+        public IActionResult GetUserData()
+        {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "sub").Value;
+            return Ok(userId);
         }
     }
 }
