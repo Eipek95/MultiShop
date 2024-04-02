@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\admin\help-documentation\assets\.DS_Store" />
+    <None Include="wwwroot\admin\help-documentation\assets\blueprint-css\plugins\.DS_Store" />
+    <None Include="wwwroot\admin\html\app\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\charts\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\component\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\dist\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\forms\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\maps\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\pages\et-line-font\fonts\.DS_Store" />
+    <None Include="wwwroot\admin\html\tables\et-line-font\fonts\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
