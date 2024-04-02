@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateProduct";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+@model UpdateProductDto
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Düzenleme Sayfası</h4>
+                <br />
+                <form method="post" asp-action="UpdateProduct" asp-area="Admin">
+                    <div class="form-group">
+                        <label asp-for="ProductID">Ürün ID</label>
+                        <input type="text" class="form-control" asp-for="ProductID" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductName">Ürün Adı</label>
+                        <input type="text" class="form-control" asp-for="ProductName" placeholder="Ürün Adı" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductPrice">Ürün Fiyatı</label>
+                        <input type="text" class="form-control" asp-for="ProductPrice"  required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductImageUrl">Ürün Görseli</label>
+                        <input type="text" class="form-control" asp-for="ProductImageUrl" placeholder="Ürün Görseli" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryID">Ürün Kategorisi</label>
+                        @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.categoryList, new { @style = "padding:0px 12px;", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductDescription">Ürün Açıklaması</label>
+                        <textarea type="text" class="form-control" asp-for="ProductDescription" placeholder="Ürün Açıklaması" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

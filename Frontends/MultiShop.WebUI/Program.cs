@@ -1,10 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -20,8 +20,29 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//      name: "Admin",
+//      pattern: "Admin/{controller=AdminLayout}/{action=Index}/{id?}"
+//    );
+//});
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Category}/{action=Index}/{id?}"
+        );
+
+    endpoints.MapControllerRoute(
+   name: "default",
+   pattern: "{controller=Default}/{action=Index}/{id?}"
+   );
+
+});
 app.Run();
