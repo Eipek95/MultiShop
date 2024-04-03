@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateFeatureSlider";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+@model UpdateFeatureSliderDto
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Slider Görseli Düzenleme Sayfası</h4>
+                <form method="post" asp-action="UpdateFeatureSlider" asp-area="Admin">
+                    <div class="form-group">
+                        <label asp-for="FeatureSliderID">Görsel ID</label>
+                        <input type="text" class="form-control" asp-for="FeatureSliderID" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title">Görsel Balığı</label>
+                        <input type="text" class="form-control" asp-for="Title" placeholder="Görsel Başlığı" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Görsel Açıklaması Adı</label>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="Görsel Açıklaması" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Imageurl">Görsel Linki</label>
+                        <input type="text" class="form-control" asp-for="Imageurl" placeholder="Görsel Linki" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
