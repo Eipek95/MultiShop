@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using MultiShop.Catalog.Services.AboutServices;
 using MultiShop.Catalog.Services.BrandServices;
 using MultiShop.Catalog.Services.CategoryServices;
 using MultiShop.Catalog.Services.FeatureServices;
@@ -27,6 +28,7 @@ namespace MultiShop.Catalog.Extensions
             services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<IOfferDiscountService, OfferDiscountService>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IAboutService, AboutService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
