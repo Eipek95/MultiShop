@@ -28,7 +28,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
-                return View(values);
+                return View(values?.OrderBy(x => x.CategoryName).ToList());
             }
             return View();
         }

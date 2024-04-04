@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using MultiShop.Catalog.Services.BrandServices;
 using MultiShop.Catalog.Services.CategoryServices;
+using MultiShop.Catalog.Services.FeatureServices;
 using MultiShop.Catalog.Services.FeatureSliderServices;
+using MultiShop.Catalog.Services.OfferDiscountServices;
 using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductServices;
@@ -21,6 +24,9 @@ namespace MultiShop.Catalog.Extensions
             services.AddScoped<IProductDetailService, ProductDetailService>();
             services.AddScoped<IFeatureSliderService, FeatureSliderService>();
             services.AddScoped<ISpecialOfferService, SpecialOfferService>();
+            services.AddScoped<IFeatureService, FeatureService>();
+            services.AddScoped<IOfferDiscountService, OfferDiscountService>();
+            services.AddScoped<IBrandService, BrandService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

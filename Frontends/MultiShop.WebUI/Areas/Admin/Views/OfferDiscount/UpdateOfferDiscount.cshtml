@@ -1,0 +1,40 @@
+﻿@model  UpdateOfferDiscountDto
+@{
+    ViewData["Title"] = "UpdateOfferDiscount";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>İndirim Teklifi Düzenleme Sayfası</h4>
+                <form method="post" asp-action="UpdateOfferDiscount" asp-area="Admin">
+                    <div class="form-group">
+                        <label asp-for="OfferDiscountId">İndirim Teklifi ID</label>
+                        <input type="text" class="form-control" asp-for="OfferDiscountId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title">İndirim Teklifi Başlığı</label>
+                        <input type="text" class="form-control" asp-for="Title" placeholder="İndirim Teklifi Başlığı" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SubTitle">İndirim Teklifi Alt Başlığı</label>
+                        <input type="text" class="form-control" asp-for="SubTitle" placeholder="İndirim Teklifi Alt Başlığı" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageUrl">İndirim Teklif Görseli</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" placeholder="İndirim Teklif Görseli" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ButtonTitle">İndirim Teklif Buton Başlığı</label>
+                        <input type="text" class="form-control" asp-for="ButtonTitle" placeholder="İndirim Teklif Button Başlığı" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

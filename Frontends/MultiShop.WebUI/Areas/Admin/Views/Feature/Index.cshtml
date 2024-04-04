@@ -1,0 +1,48 @@
+﻿@model List<ResultFeatureDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Alan İşlemleri</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Öne Çıkan Alan Adı</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Title</td>
+                                    <td>
+                                        <a asp-action="DeleteFeature" asp-controller="Feature" asp-area="Admin" asp-route-id="@item.FeatureID" class="btn btn-danger">Sil</a>
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="UpdateFeature" asp-controller="Feature" asp-area="Admin" asp-route-id="@item.FeatureID" class="btn btn-success">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <a asp-action="CreateFeature" asp-controller="Feature" asp-area="Admin" class="btn btn-success">Yeni Alan Girişi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

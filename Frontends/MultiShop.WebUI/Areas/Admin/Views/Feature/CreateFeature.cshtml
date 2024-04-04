@@ -1,0 +1,31 @@
+﻿@model CreateFeatureDto
+@{
+    ViewData["Title"] = "CreateFeature";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Alanı Ekleme Sayfası</h4>
+                <form method="post" asp-action="CreateFeature" asp-area="Admin">
+                    <div class="form-group">
+                        <label asp-for="Title">Alan Başlığı</label>
+                        <input type="text" class="form-control" asp-for="Title" placeholder="Alan Başlığı" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Icon">Alan Iconu</label>
+                        <input type="text" class="form-control" asp-for="Icon" placeholder="Alan Iconu" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
