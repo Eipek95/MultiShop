@@ -23,7 +23,7 @@
 <!-- Shop Detail Start -->
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
-        @await Component.InvokeAsync("_ProductDetailImageSliderComponentPartial")
+        @await Component.InvokeAsync("_ProductDetailImageSliderComponentPartial", new { productId = ViewBag.x })
         @await Component.InvokeAsync("_ProductDetailFeatureComponentPartial", new { productId = ViewBag.x })
     </div>
     <div class="row px-xl-5">
