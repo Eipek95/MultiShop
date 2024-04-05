@@ -16,7 +16,10 @@
                 </div>
             </div>
             <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate" href="">@item.ProductName</a>
+                <a class="h6 text-decoration-none text-truncate" 
+                asp-action="ProductDetail" 
+                asp-controller="ProductList" 
+                asp-route-productId="@item.ProductId">@item.ProductName</a>
                 @{
                     decimal oldPrice = (item.ProductPrice * 15) / 100 + item.ProductPrice;
                 }
@@ -33,7 +36,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 }

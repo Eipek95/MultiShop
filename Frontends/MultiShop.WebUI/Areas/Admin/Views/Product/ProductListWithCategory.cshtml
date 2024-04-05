@@ -21,6 +21,7 @@
                                 <th>Ürün Kategorisi</th>
                                 <th>Sil</th>
                                 <th>Güncelle</th>
+                                <th>Ürün Görselleri</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,11 +34,14 @@
                                     <td>@item.ProductPrice</td>
                                     <td>@item.Category.CategoryName</td>
                                     <td>
-                                        <a asp-action="DeleteProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.ProductID" class="btn btn-danger">Sil</a>
+                                        <a asp-action="DeleteProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-danger">Sil</a>
                                     </td>
 
                                     <td>
-                                        <a asp-action="UpdateProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.ProductID" class="btn btn-success">Güncelle</a>
+                                        <a asp-action="UpdateProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-success">Güncelle</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="ProductImageDetail" asp-controller="ProductImage" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-success">Ürün Görselleri</a>
                                     </td>
                                 </tr>
                             }
