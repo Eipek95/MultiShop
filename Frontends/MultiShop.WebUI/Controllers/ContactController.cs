@@ -1,12 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MultiShop.Catalog.Dtos.ContactDtos;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace MultiShop.WebUI.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public ContactController(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(CreateContactDto request)
+        {
+            request.IsRead = false;
+            request.SendDate = DateTime.Now;
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(request);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7022/api/Contact", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Default");
+            }
+
+            return RedirectToAction("Index", "Contact");
         }
     }
 }
