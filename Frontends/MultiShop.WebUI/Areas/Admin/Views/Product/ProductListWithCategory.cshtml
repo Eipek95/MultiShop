@@ -22,6 +22,7 @@
                                 <th>Sil</th>
                                 <th>Güncelle</th>
                                 <th>Ürün Görselleri</th>
+                                <th>Ürün Detay</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +42,10 @@
                                         <a asp-action="UpdateProduct" asp-controller="Product" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-success">Güncelle</a>
                                     </td>
                                     <td>
-                                        <a asp-action="ProductImageDetail" asp-controller="ProductImage" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-success">Ürün Görselleri</a>
+                                        <a asp-action="ProductImageDetail" asp-controller="ProductImage" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-info">Ürün Görselleri</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="UpdateProductDetail" asp-controller="ProductDetail" asp-area="Admin" asp-route-id="@item.ProductId" class="btn btn-warning">Ürün Detayları</a>
                                     </td>
                                 </tr>
                             }

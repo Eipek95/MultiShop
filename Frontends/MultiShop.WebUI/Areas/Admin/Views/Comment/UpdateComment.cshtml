@@ -1,0 +1,61 @@
+﻿@model UpdateCommentDto
+@{
+    ViewData["Title"] = "UpdateComment";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Yorum Düzenleme Sayfası</h4>
+                <br />
+                <form method="post" asp-action="UpdateComment" asp-area="Admin">
+                    <div class="form-group">
+                        <label asp-for="UserCommentId">Yorum ID</label>
+                        <input type="text" class="form-control" asp-for="UserCommentId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductId">Yorum Yapılan Ürün ID</label>
+                        <input type="text" class="form-control" asp-for="ProductId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameSurname">Yorum Yapan Kişi</label>
+                        <input type="text" class="form-control" asp-for="NameSurname" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Yorum Yapan Kişi Maili</label>
+                        <input type="text" class="form-control" asp-for="Email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CreatedDate">Yorum Oluşturma Tarihi</label>
+                        <input type="text" class="form-control" asp-for="CreatedDate" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Rating">İnceleme Puanı</label>
+                        <input type="number" class="form-control" asp-for="Rating" value="@Model.Rating" min="0" max="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CommentDetail">Yorum</label>
+                        <input type="text" class="form-control" asp-for="CommentDetail" placeholder="Yorum" required>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageUrl">Yorum Yapan Kişi Görseli</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" placeholder="Kategori Görseli" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" asp-for="Status">
+                                Aktif
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

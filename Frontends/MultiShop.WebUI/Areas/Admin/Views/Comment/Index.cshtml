@@ -1,0 +1,61 @@
+﻿@model List<ResultCommentDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Yorum İşlemleri</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kullanıcı</th>
+                                <th>Yorum</th>
+                                <th>Tarih</th>
+                                <th>Durum</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.NameSurname</td>
+                                    <td>@item.CommentDetail</td>
+                                    <td>@item.CreatedDate</td>
+                                    @if (item.Status)
+                                    {
+                                        <td class="text-success">Aktif</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">Pasif</td>
+                                    }
+                                    <td>
+                                        <a asp-action="DeleteComment" asp-controller="Comment" asp-area="Admin" asp-route-id="@item.UserCommentId" class="btn btn-danger">Sil</a>
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="UpdateComment" asp-controller="Comment" asp-area="Admin" asp-route-id="@item.UserCommentId" class="btn btn-success">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
