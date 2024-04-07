@@ -1,0 +1,89 @@
+﻿@model CreateLoginDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MultiShop -  E-Ticaretin Merkezi &amp; Kullanıcı Girişi</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/admin/html/bootstrap/css/bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Template style -->
+    <link rel="stylesheet" href="~/admin/html/dist/css/style.css">
+    <link rel="stylesheet" href="~/admin/html/pages/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/admin/html/pages/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="~/admin/html/dist/weather/weather-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="~/admin/html/dist/weather/weather-icons-wind.min.css">
+
+
+</head>
+
+<body class="body-bg-color">
+    <div class="wrapper">
+        <div class="form-body">
+            <form class="col-form" novalidate method="post">
+                <header>
+                    <div class="col-lg-12 text-center">
+                        <a href="" class="text-decoration-none">
+                            <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
+                            <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        </a>
+                        <hr />
+                    </div>
+                    <h4 class="bg-dark text-primary text-center text-opacity-75">MultiShop Giriş Formu.</h4>
+                </header>
+                <fieldset>
+                    <section>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Kullanıcı Adınız</label>
+                            <input class="form-control" placeholder="Kullanıcı Adınız" type="text" asp-for="Username"  required>
+                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Şifreniz</label>
+                            <input class="form-control" placeholder="Şifreniz" type="password" asp-for="Password" required>
+                            <span class="fa fa-lock form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <label class="checkbox">
+                                    <input name="remember" checked="" type="checkbox">
+                                    <i></i>Beni Hatırla
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </fieldset>
+                <footer>
+                    <div class="row justify-content-between">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary form-control" type="submit">Giriş Yap</button>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-info btn-sm form-control" style="margin-top:10px;">Kayıt Ol</a>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/admin/html/dist/js/jquery.min.js"></script>
+    <script src="~/admin/html/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/admin/html/dist/js/ovio.js"></script>
+</body>
+</html>
