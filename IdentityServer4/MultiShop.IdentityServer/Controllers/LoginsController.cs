@@ -23,7 +23,7 @@ namespace MultiShop.IdentityServer.Controllers
             var result = await _signInManager.PasswordSignInAsync(request.Username, request.Password, false, false);
             if (result.Succeeded)
             {
-                return Ok("Giriş Başarılı");
+                return Ok("deneme amaçlı gönderildi");
             }
             else
             {

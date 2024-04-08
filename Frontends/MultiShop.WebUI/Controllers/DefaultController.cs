@@ -1,16 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MultiShop.WebUI.Services;
 
 namespace MultiShop.WebUI.Controllers
 {
     public class DefaultController : Controller
     {
+        private readonly ILoginService _loginService;
+
+        public DefaultController(ILoginService loginService)
+        {
+            _loginService = loginService;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
-            var userName = User.Identity.Name;
-            var user = User.Claims;
-            int x = 0;
+
+            var user = _loginService.GetUserId;
+
             return View();
         }
     }

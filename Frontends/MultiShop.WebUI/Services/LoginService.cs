@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace MultiShop.WebUI.Services
+﻿namespace MultiShop.WebUI.Services
 {
     public class LoginService : ILoginService
     {
@@ -11,6 +9,6 @@ namespace MultiShop.WebUI.Services
             _contextAccessor = contextAccessor;
         }
 
-        public string GetUserId => (_contextAccessor.HttpContext!.User.FindFirst(x => x.Value == ClaimTypes.NameIdentifier))!.Value;
+        public string GetUserId => (_contextAccessor.HttpContext!.User.FindFirst(x => x.Type == "sub"))!.Value;
     }
 }

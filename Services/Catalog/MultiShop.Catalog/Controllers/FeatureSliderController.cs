@@ -5,9 +5,11 @@ using MultiShop.Catalog.Services.FeatureSliderServices;
 
 namespace MultiShop.Catalog.Controllers
 {
-    [AllowAnonymous]
+
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class FeatureSliderController : ControllerBase
     {
         private readonly IFeatureSliderService _featureSliderService;

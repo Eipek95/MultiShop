@@ -39,7 +39,6 @@ namespace MultiShop.WebUI.Controllers
 
             var httpClient = _httpClientFactory.CreateClient();
             var responseMessage = await httpClient.PostAsync("http://localhost:5001/connect/token", new FormUrlEncodedContent(tokenData));
-            var responseContent = await responseMessage.Content.ReadAsStringAsync();
 
             if (responseMessage.IsSuccessStatusCode)
             {
