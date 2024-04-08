@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.IdentityDtos.LoginDtos;
 using MultiShop.WebUI.Models;
+using MultiShop.WebUI.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
@@ -12,13 +13,15 @@ namespace MultiShop.WebUI.Controllers
     public class LoginController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IIdentityService _identityService;
 
-        public LoginController(IHttpClientFactory httpClientFactory)
+        public LoginController(IHttpClientFactory httpClientFactory, IIdentityService identityService)
         {
             _httpClientFactory = httpClientFactory;
+            _identityService = identityService;
         }
 
-        [HttpGet]
+        [HttpGet]//bu kodları ben kendim yaparak login işlemi
         public IActionResult Index()
         {
             return View();
@@ -30,7 +33,7 @@ namespace MultiShop.WebUI.Controllers
 
             var tokenData = new Dictionary<string, string>
             {
-                { "client_id", "MultiShopVisitorId" },
+                { "client_id", "MultiShopManagerId" },
                 { "client_secret", "multishopsecret" },
                 { "grant_type", "password" },
                 { "username", request.Username.ToString() },
@@ -66,13 +69,28 @@ namespace MultiShop.WebUI.Controllers
                             IsPersistent = true
                         };
 
-                        var deger = token.RawData;
+
                         await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
                         return RedirectToAction(nameof(DefaultController.Index), "Default");
                     }
                 }
             }
             return View();
+        }
+
+
+        //[HttpGet]//bu kod ise identityserver4 için gerekli ve daha güvenli bir şekilde yapılan login işlemi
+        //public IActionResult SignIn()
+        //{
+        //    return View();
+        //}
+        [HttpGet]
+        public async Task<IActionResult> SignIn(SignInDto signInDto)
+        {
+            signInDto.Username = "eipek3";
+            signInDto.Password = "pASSWORD123*";
+            await _identityService.SignIn(signInDto);
+            return RedirectToAction(nameof(DefaultController.Index), "Default");
         }
     }
 }

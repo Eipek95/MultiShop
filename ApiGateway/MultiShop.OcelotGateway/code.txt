@@ -1,0 +1,22 @@
+
+
+    
+
+    
+
+   
+
+    
+
+    
+    
+  
+
+
+
+
+    -------------------------------------------
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [ "BasketFullPermission" ]
+      }

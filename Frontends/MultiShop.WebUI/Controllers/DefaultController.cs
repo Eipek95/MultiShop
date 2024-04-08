@@ -16,9 +16,7 @@ namespace MultiShop.WebUI.Controllers
         [Authorize]
         public IActionResult Index()
         {
-
             var user = _loginService.GetUserId;
-
             return View();
         }
     }
