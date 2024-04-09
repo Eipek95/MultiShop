@@ -1,4 +1,6 @@
-﻿namespace MultiShop.WebUI.Services
+﻿using MultiShop.WebUI.Services.Interfaces;
+
+namespace MultiShop.WebUI.Services.Concrete
 {
     public class LoginService : ILoginService
     {
@@ -9,6 +11,6 @@
             _contextAccessor = contextAccessor;
         }
 
-        public string GetUserId => (_contextAccessor.HttpContext!.User.FindFirst(x => x.Type == "sub"))!.Value;
+        public string GetUserId => _contextAccessor.HttpContext!.User.FindFirst(x => x.Type == "sub")!.Value;
     }
 }

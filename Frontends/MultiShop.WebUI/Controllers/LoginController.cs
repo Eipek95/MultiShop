@@ -79,18 +79,18 @@ namespace MultiShop.WebUI.Controllers
         }
 
 
-        //[HttpGet]//bu kod ise identityserver4 için gerekli ve daha güvenli bir şekilde yapılan login işlemi
-        //public IActionResult SignIn()
-        //{
-        //    return View();
-        //}
-        [HttpGet]
+        [HttpGet]//bu kod ise identityserver4 için gerekli ve daha güvenli bir şekilde yapılan login işlemi
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
         public async Task<IActionResult> SignIn(SignInDto signInDto)
         {
             signInDto.Username = "eipek3";
             signInDto.Password = "pASSWORD123*";
             await _identityService.SignIn(signInDto);
-            return RedirectToAction(nameof(DefaultController.Index), "Default");
+            return RedirectToAction(nameof(UserController.Index), "User");
         }
     }
 }

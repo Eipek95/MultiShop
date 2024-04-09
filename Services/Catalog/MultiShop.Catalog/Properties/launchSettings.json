@@ -12,9 +12,10 @@
     "MultiShop.Catalog": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7022;http://localhost:5126",
+      //"applicationUrl": "https://localhost:7022;http://localhost:5126",
+      "applicationUrl": "http://localhost:5126",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

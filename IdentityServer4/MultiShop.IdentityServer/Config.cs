@@ -80,7 +80,9 @@ namespace MultiShop.IdentityServer
                 AllowedGrantTypes=GrantTypes.ClientCredentials,
                 //AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
                 ClientSecrets={new Secret("multishopsecret".Sha256())},
-                AllowedScopes={ "CatalogFullPermission", "DiscountFullPermission", "OcelotFullPermission", "CommentFullPermission" , "ImagesFullPermission" }
+                AllowedScopes={"CatalogFullPermission","DiscountFullPermission", "OcelotFullPermission", "CommentFullPermission" , "ImagesFullPermission",
+                IdentityServerConstants.LocalApi.ScopeName},
+                AllowAccessTokensViaBrowser=true,
             },
 
             //Manager

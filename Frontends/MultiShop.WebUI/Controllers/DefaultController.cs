@@ -1,22 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MultiShop.WebUI.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.Interfaces;
 
 namespace MultiShop.WebUI.Controllers
 {
     public class DefaultController : Controller
     {
         private readonly ILoginService _loginService;
+        private readonly ICategoryService _categoryService;
 
-        public DefaultController(ILoginService loginService)
+        public DefaultController(ILoginService loginService, ICategoryService categoryService)
         {
             _loginService = loginService;
+            _categoryService = categoryService;
         }
-
-        [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = _loginService.GetUserId;
+            var category = await _categoryService.GetCategoryAllAsync();
+
             return View();
         }
     }

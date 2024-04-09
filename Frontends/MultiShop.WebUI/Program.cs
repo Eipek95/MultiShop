@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MultiShop.WebUI.Services;
+using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.CatalogServices.CategoryService;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
@@ -25,7 +27,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 {
-    opt.LoginPath = "/Login/Index/";
+    opt.LoginPath = "/Login/SignIn/";
     opt.LogoutPath = "/login/LogOut/";
     opt.AccessDeniedPath = "/Pages/AccessDenied/";
     opt.Cookie.Name = "MultiShopCookie";
@@ -33,9 +35,29 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     opt.SlidingExpiration = true;
 });//identityserver4 cookie auth
 
+builder.Services.AddAccessTokenManagement();
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+
+
+var values = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+builder.Services.AddHttpClient<IUserService, UserService>(opt =>
+{
+    opt.BaseAddress = new Uri(values.IdentityServerUrl);
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>()
+;//herhangi bir auth iþlemi yaptýðýmýz anda handler tetiklesin ve o iþleyici çalýþýp tokenun geçerliliðini kontrol etsin(postman mantýðý)
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
