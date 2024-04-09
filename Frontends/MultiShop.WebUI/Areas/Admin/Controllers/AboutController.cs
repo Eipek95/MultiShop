@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.AboutDtos;
-using Newtonsoft.Json;
-using System.Text;
+using MultiShop.WebUI.Services.CatalogServices.AboutServices;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AboutController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IAboutService _aboutService;
 
-        public AboutController(IHttpClientFactory httpClientFactory)
+        public AboutController(IAboutService aboutService)
         {
-            _httpClientFactory = httpClientFactory;
+            _aboutService = aboutService;
         }
 
         public async Task<IActionResult> Index()
@@ -22,15 +21,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v3 = "Hakkımızda Listesi";
             ViewBag.v0 = "Hakkımızda İşlemleri";
 
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7022/api/About");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
-                return View(values);
-            }
-            return View();
+            var result = await _aboutService.GetAboutAllAsync();
+            return View(result);
         }
         [HttpGet]
         public IActionResult CreateAbout()
@@ -45,21 +37,13 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAbout(CreateAboutDto request)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(request);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7022/api/About", stringContent);
+            await _aboutService.CreateAboutAsync(request);
             return RedirectToAction(nameof(AboutController.Index), new { area = "Admin" });
         }
 
         public async Task<IActionResult> DeleteAbout(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7022/api/About?id=" + id);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction(nameof(AboutController.Index), new { area = "Admin" });
-            }
+            await _aboutService.DeleteAboutAsync(id);
             return View();
         }
 
@@ -72,29 +56,22 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v0 = "Hakkımızda İşlemleri";
 
 
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7022/api/About/" + id);
-            if (responseMessage.IsSuccessStatusCode)
+            var result = await _aboutService.GetByIdAboutAsync(id);
+            return View(new UpdateAboutDto
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateAboutDto>(jsonData);
-                return View(values);
-            }
-            return View();
+                AboutID = result.AboutID,
+                Address = result.Address,
+                Description = result.Description,
+                Email = result.Email,
+                Phone = result.Phone
+            });
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateAbout(UpdateAboutDto request)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(request);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7022/api/About", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction(nameof(AboutController.Index), new { area = "Admin" });
-            }
-            return RedirectToAction(nameof(AboutController.UpdateAbout), new { id = request.AboutID });
+            await _aboutService.UpdateAboutAsync(request);
+            return RedirectToAction(nameof(AboutController.Index), new { area = "Admin" });
         }
     }
 }

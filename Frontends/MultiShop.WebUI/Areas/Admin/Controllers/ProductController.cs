@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MultiShop.DtoLayer.CatalogDtos.ProductDtos;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
@@ -7,6 +8,7 @@ using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -27,15 +29,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
             var products = await _productService.GetProductAllAsync();
             return View(products);
-            //var client = _httpClientFactory.CreateClient();
-            //var responseMessage = await client.GetAsync("https://localhost:7022/api/Product");
-            //if (responseMessage.IsSuccessStatusCode)
-            //{
-            //    var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            //    var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
-            //    return View(values);
-            //}
-
         }
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
@@ -114,15 +107,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v2 = "Ürünler";
             ViewBag.v3 = "Ürün Listesi";
             ViewBag.v0 = "Ürün İşlemleri";
+
             var products = await _productService.GetProductsWithCategoryAsync();
-            //var client = _httpClientFactory.CreateClient();
-            //var responseMessage = await client.GetAsync("https://localhost:7022/api/Product/ProductListWithCategory");
-            //if (responseMessage.IsSuccessStatusCode)
-            //{
-            //    var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            //    var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
-            //    return View(values);
-            //}
             return View(products);
         }
 
