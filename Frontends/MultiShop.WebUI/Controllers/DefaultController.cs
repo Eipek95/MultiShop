@@ -1,23 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
-using MultiShop.WebUI.Services.Interfaces;
 
 namespace MultiShop.WebUI.Controllers
 {
     public class DefaultController : Controller
     {
-        private readonly ILoginService _loginService;
-        private readonly ICategoryService _categoryService;
-
-        public DefaultController(ILoginService loginService, ICategoryService categoryService)
+        public IActionResult Index()
         {
-            _loginService = loginService;
-            _categoryService = categoryService;
-        }
-        public async Task<IActionResult> Index()
-        {
-            var category = await _categoryService.GetCategoryAllAsync();
-
+            ViewBag.Directory1 = "MultiShop";
+            ViewBag.Directory2 = "Anasayfa";
+            ViewBag.Directory3 = "Ürün Listesi";
             return View();
         }
     }

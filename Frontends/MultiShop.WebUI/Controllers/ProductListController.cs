@@ -17,11 +17,17 @@ namespace MultiShop.WebUI.Controllers
         public IActionResult Index(string id)
         {
             ViewBag.categoryId = id;
+            ViewBag.Directory1 = "Anasayfa";
+            ViewBag.Directory2 = "Ürünler";
+            ViewBag.Directory3 = "Ürün Listesi";
             return View();
         }
 
         public IActionResult ProductDetail(string productId)
         {
+            ViewBag.Directory1 = "Anasayfa";
+            ViewBag.Directory2 = "Ürünler";
+            ViewBag.Directory3 = "Ürün Detay";
             ViewBag.x = productId;
             return View();
         }
