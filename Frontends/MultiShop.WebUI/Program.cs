@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.CatalogServices.AboutServices;
 using MultiShop.WebUI.Services.CatalogServices.BrandServices;
 using MultiShop.WebUI.Services.CatalogServices.CategoryService;
 using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Services.CatalogServices.CommentServices;
+using MultiShop.WebUI.Services.CatalogServices.ContactServices;
 using MultiShop.WebUI.Services.CatalogServices.FeatureServices;
 using MultiShop.WebUI.Services.CatalogServices.FeatureSliderServices;
 using MultiShop.WebUI.Services.CatalogServices.OfferDiscountServices;
@@ -13,6 +16,7 @@ using MultiShop.WebUI.Services.CatalogServices.ProductImageServices;
 using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 using MultiShop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using MultiShop.WebUI.Services.Concrete;
+using MultiShop.WebUI.Services.DiscountServices;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
 
@@ -63,10 +67,26 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>()
 ;//herhangi bir auth iþlemi yaptýðýmýz anda handler tetiklesin ve o iþleyici çalýþýp tokenun geçerliliðini kontrol etsin(postman mantýðý)
 
+
+builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Basket.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
+builder.Services.AddHttpClient<IDiscountService, DiscountService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Discount.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
+
 builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+
 
 builder.Services.AddHttpClient<IProductService, ProductService>(opt =>
 {
@@ -116,6 +136,16 @@ builder.Services.AddHttpClient<IProductImageService, ProductImageService>(opt =>
 builder.Services.AddHttpClient<IProductDetailService, ProductDetailService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IContactService, ContactService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<ICommentService, CommentService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Comment.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 builder.Services.AddHttpClient();

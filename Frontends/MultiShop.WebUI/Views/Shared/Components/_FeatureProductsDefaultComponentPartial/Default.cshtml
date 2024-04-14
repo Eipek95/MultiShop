@@ -9,7 +9,7 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="@product.ProductImageUrl" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="#" onclick="showProductId('@product.ProductID')"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
@@ -42,3 +42,26 @@
 
     </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function showProductId(productId) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AddBasketItem", "Shopping")",
+            data: { productId: productId },
+            success: function () {
+               alert('Ürün Başarıyla Sepete Eklendi')
+            },
+            error: function () {
+                alert('Ürün sepete eklenirken bir hata oluştu.');
+            }
+        });
+    }
+</script>
+
+
+

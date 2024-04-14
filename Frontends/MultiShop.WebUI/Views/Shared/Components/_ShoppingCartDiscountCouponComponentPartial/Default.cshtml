@@ -1,7 +1,11 @@
-﻿<div class="col-lg-4">
-    <form class="mb-30" action="">
+﻿@model BasketCouponViewModel
+@{
+    decimal discountPrice = 0;
+}
+<div class="col-lg-4">
+    <form class="mb-30" id="applyCouponForm">
         <div class="input-group">
-            <input type="text" class="form-control border-0 p-4" placeholder="Kupon Kodunuz">
+            <input type="text" class="form-control border-0 p-4" placeholder="Kupon Kodunuz" id="couponCode" required>
             <div class="input-group-append">
                 <button class="btn btn-primary">Kupon Uygula</button>
             </div>
@@ -10,21 +14,72 @@
     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sipariş Özeti</span></h5>
     <div class="bg-light p-30 mb-5">
         <div class="border-bottom pb-2">
+
             <div class="d-flex justify-content-between mb-3">
                 <h6>Toplam Ürün Fiyatı</h6>
-                <h6>150 ₺</h6>
+                <h6>@Model.BasketTotalDto.OriginalPrice ₺</h6>
             </div>
-            <div class="d-flex justify-content-between">
-                <h6 class="font-weight-medium">Kdv</h6>
-                <h6 class="font-weight-medium">15 ₺</h6>
-            </div>
+
+            @if (Model.BasketTotalDto.HasDiscount)
+            {
+                <div class="d-flex justify-content-between mb-1">
+                    <h6 class="font-weight-medium">Kupon Kodu</h6>
+                    <h6 class="font-weight-medium">@Model?.BasketTotalDto.DiscountCode</h6>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <h6 class="font-weight-medium">İndirimli Tutarı(%@Model?.BasketTotalDto.DiscountRate.Value)</h6>
+                    @{
+                        discountPrice = (Model.BasketTotalDto.OriginalPrice) * (Model.BasketTotalDto.DiscountRate.Value) / 100;
+                    }
+                    <h6 class="font-weight-medium">-@discountPrice ₺</h6>
+                </div>
+
+            }
+
         </div>
         <div class="pt-2">
             <div class="d-flex justify-content-between mt-2">
-                <h5>Toplam</h5>
-                <h5>160 ₺</h5>
+                <h5>Ödenecek Tutar</h5>
+                <h5>@Model.BasketTotalDto.TotalPrice ₺</h5>
             </div>
+            @if (Model.BasketTotalDto.HasDiscount)
+            {
+                <a asp-action="CancelApplyDiscount" asp-controller="Shopping" class="btn btn-block btn-danger font-weight-bold my-3 py-3">İndirim Kuponu İptal Et</a>
+            }
             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Ödeme Ekranına Geç</button>
         </div>
     </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#applyCouponForm").submit(function (event) {
+
+            event.preventDefault();
+
+            var couponCode = $("#couponCode").val().trim();
+
+            // Boş değer kontrolü yap
+            if (!couponCode) {
+                alert("Kupon kodu gerekli!");
+                return; 
+            }
+
+            // Ajax isteği gönder
+            $.ajax({
+                url: "/Shopping/ApplyDiscount", // Controller'a post edilecek URL
+                type: "POST",
+                data: { Code: couponCode },
+                success: function (response) {
+                    console.log("Kupon başarıyla uygulandı!");
+                    window.location.href = "/Shopping/Index?couponCode=" + couponCode;
+                },
+                error: function (xhr, status, error) {
+                    console.error("Kupon uygulanırken bir hata oluştu: " + error);
+                }
+            });
+        });
+    });
+</script>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.Basket.Dtos;
 using MultiShop.Basket.LoginServices;
 using MultiShop.Basket.Services;
@@ -7,6 +8,7 @@ namespace MultiShop.Basket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BasketsController : ControllerBase
     {
         private readonly IBasketService _basketService;
@@ -22,6 +24,13 @@ namespace MultiShop.Basket.Controllers
         {
             var values = await _basketService.GetBasket(_loginService.GetUserId);
             return Ok(values);
+        }
+
+        [HttpGet("InitializeCart")]
+        public async Task<IActionResult> InitializeCart()
+        {
+            await _basketService.InitializeCart(_loginService.GetUserId);
+            return Ok("Başarıyla Oluşturuldu");
         }
 
         [HttpPost]

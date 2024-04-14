@@ -1,8 +1,7 @@
-﻿namespace MultiShop.Discount.Dtos
+﻿namespace MultiShop.DtoLayer.DiscountDtos
 {
-    public class ResultDiscountCouponDto
+    public class GetDiscountCodeDetailByCode
     {
-        public int CouponId { get; set; }
         public string UserId { get; set; }
         public string Code { get; set; }
         public int Rate { get; set; }
