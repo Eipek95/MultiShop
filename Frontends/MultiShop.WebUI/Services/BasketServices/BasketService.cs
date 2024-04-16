@@ -65,6 +65,7 @@ namespace MultiShop.WebUI.Services.BasketServices
         {
             var basket = await GetBasket();
             basket.DiscountCode = "-";
+            basket.DiscountRate = 0;
             await SaveBasket(basket);
             return true;
         }

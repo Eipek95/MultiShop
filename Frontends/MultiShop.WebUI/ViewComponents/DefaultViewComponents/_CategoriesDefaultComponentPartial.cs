@@ -1,21 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
+using MultiShop.WebUI.Models;
+using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace MultiShop.WebUI.ViewComponents.DefaultViewComponents
 {
     public class _CategoriesDefaultComponentPartial : ViewComponent
     {
-        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
 
-        public _CategoriesDefaultComponentPartial(ICategoryService categoryService)
+        public _CategoriesDefaultComponentPartial(IProductService productService)
         {
-            _categoryService = categoryService;
+            _productService = productService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _categoryService.GetCategoryAllAsync();
-            return View(result.OrderBy(x => x.CategoryName).ToList());
+
+
+            var products = await _productService.GetProductsWithCategoryAsync();
+
+            var categoryProduct = products.GroupBy(p => p.Category.CategoryName)
+                                          .Select(g => new CategoryProduct
+                                          {
+                                              CategoryName = g.Key,
+                                              Count = g.Count(),
+                                              CategoryID = g.FirstOrDefault()?.Category.CategoryID,
+                                              ImageUrl = g.FirstOrDefault()?.Category.ImageUrl
+                                          })
+                                          .ToList();
+
+            return View(categoryProduct);
         }
     }
 }
+

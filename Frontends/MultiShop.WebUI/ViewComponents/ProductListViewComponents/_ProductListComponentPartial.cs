@@ -12,10 +12,18 @@ namespace MultiShop.WebUI.ViewComponents.ProductListViewComponents
             _productService = productService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string categoryId)
+        public async Task<IViewComponentResult> InvokeAsync(string categoryId, int pageNumber = 1, int pageSize = 1)
         {
             var result = await _productService.GetProductsWithCategoryByCategoryIdAsync(categoryId);
-            return View(result);
+            var totalItems = result.Count();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            var values = result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalPages = totalPages;
+
+            return View(values);
         }
     }
 }

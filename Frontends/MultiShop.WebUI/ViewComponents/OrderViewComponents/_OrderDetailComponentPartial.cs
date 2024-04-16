@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MultiShop.WebUI.ViewComponents.ProductListViewComponents
+namespace MultiShop.WebUI.ViewComponents.OrderViewComponents
 {
-    public class _ProductListPaginationComponentPartial : ViewComponent
+    public class _OrderDetailComponentPartial : ViewComponent
     {
-
         public IViewComponentResult Invoke()
         {
             return View();

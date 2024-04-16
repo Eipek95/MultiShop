@@ -13,9 +13,11 @@ namespace MultiShop.WebUI.Controllers
             _commentService = commentService;
         }
 
-        public IActionResult Index(string id)
+        public IActionResult Index(string id, int pageNumber = 1, int pageSize = 1)
         {
             ViewBag.categoryId = id;
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
             ViewBag.Directory1 = "Anasayfa";
             ViewBag.Directory2 = "Ürünler";
             ViewBag.Directory3 = "Ürün Listesi";
