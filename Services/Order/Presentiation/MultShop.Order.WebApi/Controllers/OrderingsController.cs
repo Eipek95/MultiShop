@@ -30,6 +30,12 @@ namespace MultShop.Order.WebApi.Controllers
             var values = await _mediator.Send(new GetOrderingByIdQuery(id));
             return Ok(values);
         }
+        [HttpGet("GetOrderingByUserId")]
+        public async Task<IActionResult> GetOrderingByUserId(string id)
+        {
+            var values = await _mediator.Send(new GetOrderingByUserIdQuery(id));
+            return Ok(values);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateOrdering(CreateOrderingCommand command)
         {

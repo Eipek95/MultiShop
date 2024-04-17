@@ -19,6 +19,7 @@ using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.DiscountServices;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Services.OrderServices.OrderAddressServices;
+using MultiShop.WebUI.Services.OrderServices.OrderOrderingServices;
 using MultiShop.WebUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,6 +86,13 @@ builder.Services.AddHttpClient<IOrderAddressService, OrderAddressService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Discount.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
+builder.Services.AddHttpClient<IOrderOrderingService, OrderOrderingService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}{values.Order.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
 
 builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
 {
@@ -189,6 +197,12 @@ app.UseAuthorization();
 //});
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapAreaControllerRoute(
+    name: "User",
+    areaName: "User",
+    pattern: "User/{controller=Category}/{action=Index}/{id?}"
+    );
+
     endpoints.MapAreaControllerRoute(
         name: "Admin",
         areaName: "Admin",

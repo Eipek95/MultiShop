@@ -13,6 +13,7 @@ namespace MultShop.Order.WebApi.Extensions
 
             services.AddDbContext<OrderContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IOrderingRepository), typeof(OrderingRepository));
             services.ConfigureRegistiration(configuration);//application katmanı içinde
 
             services.AddSwaggerGen(c =>
