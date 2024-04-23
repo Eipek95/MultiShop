@@ -9,11 +9,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Basic Table</h4>
-                <p class="card-description">
-                    Add class <code>.table</code>
-                </p>
+               
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -28,7 +26,7 @@
                                 <tr>
                                     <td>@item.OrderingId</td>
                                     <td>@item.TotalPrice ₺</td>
-                                    <td>@item.OrderDate</td>
+                                    <td>@item.OrderDate.ToString("dd-MMM-yyyy")</td>
                                     <td><a href="#" class="btn btn-warning btn-sm">Sipariş Detayları</a></td>
                                 </tr>
                             }
