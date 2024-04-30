@@ -21,6 +21,7 @@ namespace MultiShop.IdentityServer
             new ApiResource("ResourceComment"){Scopes={"CommentFullPermission"}},
             new ApiResource("ResourcePayment"){Scopes={"PaymentFullPermission"}},
             new ApiResource("ResourceImage"){Scopes={"ImagesFullPermission"}},
+            new ApiResource("ResourceMessage"){Scopes={"MessageFullPermission"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
 
         };
@@ -66,6 +67,10 @@ namespace MultiShop.IdentityServer
             
             //image
             new ApiScope("ImagesFullPermission","Full authority for image operations"),
+            
+            
+            //message
+            new ApiScope("MessageFullPermission","Full authority for message operations"),
 
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };
@@ -93,7 +98,7 @@ namespace MultiShop.IdentityServer
                 //AllowedGrantTypes=GrantTypes.ClientCredentials,
                 AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
                 ClientSecrets={new Secret("multishopsecret".Sha256())},
-                AllowedScopes={ "CatalogFullPermission", "CatalogReadFullPermission", "OcelotFullPermission", "CommentFullPermission", "PaymentFullPermission", "ImagesFullPermission","BasketFullPermission","DiscountFullPermission","OrderFullPermission",
+                AllowedScopes={ "CatalogFullPermission", "CatalogReadFullPermission", "OcelotFullPermission", "CommentFullPermission", "PaymentFullPermission", "ImagesFullPermission","BasketFullPermission","DiscountFullPermission","OrderFullPermission","MessageFullPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.OpenId,
@@ -110,7 +115,7 @@ namespace MultiShop.IdentityServer
                 ClientSecrets={new Secret("multishopsecret".Sha256())},
                 AllowedScopes={
                     "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", "CatalogReadFullPermission","CargoFullPermission","BasketFullPermission","OcelotFullPermission",
-                    "CommentFullPermission","PaymentFullPermission","ImagesFullPermission",
+                    "CommentFullPermission","PaymentFullPermission","ImagesFullPermission","MessageFullPermission",
 
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.Email,
