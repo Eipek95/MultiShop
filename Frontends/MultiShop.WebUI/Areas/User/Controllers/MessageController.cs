@@ -27,7 +27,7 @@ namespace MultiShop.WebUI.Areas.User.Controllers
         public async Task<IActionResult> Sendbox()
         {
             var user = await _userService.GetUserInfo();
-            var values = await _messageService.GetSendboxMessageAsync("stringb");
+            var values = await _messageService.GetSendboxMessageAsync("stringa");
             return View(values);
         }
     }

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+@model List<ResultUserDto>
+<section class="content container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Kategori İşlemleri</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad Soyad</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Email</th>
+                                <th>Adres Detay</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.name</td>
+                                    <td>@item.userName</td>
+                                    <td>@item.email</td>
+                                    <td><a asp-action="UserAddressInfo" asp-controller="User" asp-area="Admin" asp-route-id="@item.id" class="btn btn-warning">Adres Detay</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -11,6 +11,7 @@ using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Services.SpecialOfferServices;
+using MultiShop.Catalog.Services.StatisticServices;
 using MultiShop.Catalog.Settings;
 using System.Reflection;
 
@@ -31,6 +32,7 @@ namespace MultiShop.Catalog.Extensions
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IStatisticService, StatisticService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

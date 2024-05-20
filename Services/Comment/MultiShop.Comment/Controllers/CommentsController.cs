@@ -57,5 +57,26 @@ namespace MultiShop.Comment.Controllers
             _context.SaveChanges();
             return Ok("Başarıyla Silindi");
         }
+
+        [HttpGet("GetActiveCommentCount")]
+        public IActionResult GetActiveCommentCount()
+        {
+            var values = _context.UserComments.Where(x => x.Status == true).Count();
+            return Ok(values);
+        }
+
+        [HttpGet("GetPassiveCommentCount")]
+        public IActionResult GetPassiveCommentCount()
+        {
+            var values = _context.UserComments.Where(x => x.Status == false).Count();
+            return Ok(values);
+        }
+
+        [HttpGet("GetTotalCommentCount")]
+        public IActionResult GetTotalCommentCount()
+        {
+            var values = _context.UserComments.Count();
+            return Ok(values);
+        }
     }
 }
