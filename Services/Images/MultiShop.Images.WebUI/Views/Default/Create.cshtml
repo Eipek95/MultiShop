@@ -1,0 +1,21 @@
+﻿@model MultiShop.Images.WebUI.DAL.Entities.ImageDrive
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Yeni Resim Ekleme</h1>
+
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data">
+        <label>Ürün Adı</label>
+        <input type="text" class="form-control border" name="Name" />
+        <br />
+        <label>Görsel Fotosu</label>
+        <input type="file" class="form-control border" name="Photo" />
+        <br />
+        <input name="SavedUrl" type="hidden" class="form-control" />
+        <input name="SavedFileName" type="hidden" class="form-control" />
+        <button class="btn btn-outline-info">Görseli Kaydet</button>
+    </form>
+</div>
